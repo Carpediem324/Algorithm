@@ -1,6 +1,6 @@
 # 코테 준비하면서 배운 알고리즘
 
-1. Direct Address Table (D.A.T.)
+## 1. Direct Address Table (D.A.T.)
 
 데이터를 주소(인덱스)로 직접 입력하는 기법이다
 
@@ -22,4 +22,35 @@ cout<<result
 - 대표적으로 가장 많은 갯수 구하기
 - 패턴구하기 
 
-2. 
+## 2.  Direct Coding
+
+네 방향 Offset 상, 하, 좌, 우 이동
+
+```c++
+int direct[4][2] ={  // dirrect 배열 저장.
+    {-1, 0}, //up
+    {1 , 0}, //down
+    {0 ,-1}, //left
+    {0 , 1} //right
+}
+
+for(i=0;i<4;i++){
+    dy = y + direct[i][0];
+    dx = x + direct[i][1];
+
+    sum += data[dy][dx];
+}
+```
+
+ - 범위 넘어가는 오버플로우 방지
+
+ ```c++
+ for(i=0;i<4;i++){
+    dy = y + direct[i][0];
+    dx = x + direct[i][1];
+
+    if(dy>=0 && dy<4 && dx>=0 && dx<4>)
+    {
+        sum += data[dy][dx];
+    }
+}
