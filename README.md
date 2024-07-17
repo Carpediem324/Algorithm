@@ -54,3 +54,45 @@ for(i=0;i<4;i++){
         sum += data[dy][dx];
     }
 }
+```
+### Direct 사용 예제
+
+```c++
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+#include <cstring>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+	//freopen("input.txt", "r", stdin);
+	int arr[3][3] = {
+		3,5,4,
+		1,1,2,
+		1,3,9
+	};
+	int y, x;
+	cin >> y >> x;
+	int direct[4][2] = {
+		{-1,0},
+		{1,0},
+		{0,-1},
+		{0,1}
+	};
+	int total = 0;
+	int dy, dx;
+	dy = y;
+	dx = x;
+	for (int i = 0; i < 4; i++)
+	{
+		dy = y + direct[i][0];
+		dx = x + direct[i][1];
+		if (dx >= 0 && dx < 3 && dy >= 0 && dy < 3) {
+			total += arr[dy][dx];
+		}
+	}
+	cout << total;
+}
+```
+
