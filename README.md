@@ -96,3 +96,44 @@ int main() {
 }
 ```
 
+## 재귀호출 Recursive Call
+
+> 함수 안에서 자기 자신을 호출하는 함수,     재귀함수를 이용한 코딩 기법을 배우게 됨
+
+### abc(x+1)
+
+1. x + 1 값을 abc함수로 보냄
+
+2. x 변수값을 바꾸지 않는다.
+
+### abc(x++)
+
+1. x값을 그대로 보냄
+
+2. 보낸뒤 x변수에 1추가
+
+## 예시) n번 재귀호출하기
+
+```c++
+#include <iostream>
+using namespace std;
+
+int vect[5] = { 8, 7, 1, 2, 3};
+void bbq(int level){
+	cout<<level;
+	if(level == 5){
+		return;
+	}
+	cout<<vect[level];
+	bbq(level + 1);
+	cout<<vect[level];
+}
+
+int main(){
+	bbq(0);
+
+	return 0;
+}
+```
+
+> 실행결과 :8712332178
