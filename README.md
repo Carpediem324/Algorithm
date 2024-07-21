@@ -166,3 +166,55 @@ int main()
 }
 ```
 > 엄청 쉬운건데 생각하기 쉽지않음...
+
+## strlen, strcpy, strcmp 사용하기
+
+### 긴문장을 제일 앞으로
+```c++
+#include <iostream>
+#include <cstring>
+#include <algorithm>
+using namespace std;
+
+int main()
+{
+	char vect[3][11];
+	int len;
+	int maxlen;
+	int maxIndex;
+
+	//세 문장 입력
+	for (int i = 0; i < 3; i++)
+	{
+		cin >> vect[i];
+	}
+
+	//가장 긴 문장 찾기
+	maxlen = -1;
+	for (int i = 0; i < 3; i++)
+	{
+		len = strlen(vect[i]);
+		if (maxlen < len)
+		{
+			maxlen = len;
+			maxIndex = i;
+		}
+	}
+
+	//1번과 가장긴 문장 교환
+	char temp[11];
+
+	strcpy(temp, vect[maxIndex]);
+	strcpy(vect[maxIndex], vect[0]);
+	strcpy(vect[0], temp);
+
+
+	for (int i = 0; i < 3; i++)
+	{
+		cout << vect[i] << endl;
+	}
+
+	return 0;
+}
+```
+
