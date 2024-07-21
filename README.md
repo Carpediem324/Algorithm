@@ -137,3 +137,32 @@ int main(){
 ```
 
 > 실행결과 :8712332178
+
+## 예시) 입력받은 레벨까지 재귀함수 동작
+입력: 2
+
+출력: 0122122
+
+```c++
+#include<iostream>
+using namespace std;
+
+int limit;
+void run(int level) {
+	cout << level;
+	if (level == limit) {
+		return;
+	}
+	run(level + 1);
+	run(level + 1);
+
+	return;
+}
+int main()
+{
+	cin >> limit;
+	run(0);
+	return 0;
+}
+```
+> 엄청 쉬운건데 생각하기 쉽지않음...
