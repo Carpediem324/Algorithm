@@ -170,6 +170,8 @@ int main()
 ## strlen, strcpy, strcmp 사용하기
 
 ### 긴문장을 제일 앞으로
+### strcmp는 같으면 0이 나온다 매우중요.
+### memset(arr,'0',sizeof(arr)) 기억하기
 ```c++
 #include <iostream>
 #include <cstring>
@@ -217,4 +219,61 @@ int main()
 	return 0;
 }
 ```
+
+## 중력 문제 - 배열에서 떨어트리기
+
+```c++
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+using namespace std;
+
+char vect[4][4];
+
+// 특정 열(column)에 있는 문자를 중력의 영향을 받아 아래로 떨어뜨리는 함수
+void drop(int column) {
+    // 아래에서부터 위로 각 행(row)을 탐색
+    for (int y = 3; y >= 0; y--) {
+        // 현재 위치가 빈칸('_')인 경우
+        if (vect[y][column] == '_') {
+            bool found = false; // 빈칸 위에 문자가 있는지 여부를 저장하는 플래그
+
+            // 현재 위치 위의 칸들을 탐색
+            for (int t = y - 1; t >= 0; t--) {
+                // 문자를 찾은 경우
+                if (vect[t][column] != '_') {
+                    // 현재 위치로 문자를 떨어뜨리고, 원래 위치는 빈칸으로 만듦
+                    vect[y][column] = vect[t][column];
+                    vect[t][column] = '_';
+                    found = true; // 문자를 찾았음을 표시
+                    break;
+                }
+            }
+
+            // 위에 더 이상 문자가 없다면 탐색 중지
+            if (!found) break;
+        }
+    }
+}
+
+int main() {
+    // 4x4 배열 입력 받기
+    freopen("input.txt", "r", stdin);
+    for (int i = 0; i < 4; i++) {
+        cin >> vect[i];
+    }
+
+    // 각 열에 대해 drop 함수를 호출하여 문자를 아래로 떨어뜨림
+    for (int column = 0; column < 3; column++) {
+        drop(column);
+    }
+
+    // 최종 배열 상태 출력
+    for (int i = 0; i < 4; i++) {
+        cout << vect[i] << endl;
+    }
+
+    return 0;
+}
+```
+> 쉬워보이는 문제였지만 한칸만떨구는게아닌 끝까지 떨구는 거기 때문에 문제가생긴다. 문자기준이아니라 내가빈칸이면 위에서 받는 형식으로 구현이 좋다.
 
