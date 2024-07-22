@@ -373,3 +373,36 @@ int main()
 	return 0;
 }
 ```
+
+## 구현
+>2중 for문 구현 시 time limit에 걸림
+```c++
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int arr[100001]; 
+
+int main() {
+	int N;
+	cin >> N; 
+	for (int i = 0; i < N; ++i) 
+		cin >> arr[i]; 
+	sort(arr, arr + N);
+
+	long long tot = -21e8;
+	long long fee = 21e8;
+	for (int i = 0; i < N; ++i) {
+		long long rev = (long long)arr[i] * (long long)(N - i);
+		if (rev > tot) {
+			tot = rev;
+			fee = arr[i]; 
+		}
+		else if (rev == tot) {
+			if (arr[i] < fee)
+				fee = arr[i]; 
+		}
+	}
+	cout << tot << " " << fee; 
+}
+```
