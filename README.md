@@ -277,3 +277,20 @@ int main() {
 ```
 > 쉬워보이는 문제였지만 한칸만떨구는게아닌 끝까지 떨구는 거기 때문에 문제가생긴다. 문자기준이아니라 내가빈칸이면 위에서 받는 형식으로 구현이 좋다.
 
+## String 사용하기
+
+
+- string.length(); // 스트링길이구하기
+- string1.find(string2) // string1안에서 string2있는지 체크, 없으면 -1 반환, 있으면 찾은 첫번째 인덱스반환
+
+
+```c++
+#include <string>
+
+int main(){
+	string arr;
+	int length = arr.length();
+}
+
+
+```
