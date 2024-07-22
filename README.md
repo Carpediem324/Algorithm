@@ -325,7 +325,7 @@ int main()
 ```
 
 ### string parsing 중요...
-```
+```c++
 #include <iostream>
 #include <string>
 using namespace std;
@@ -377,32 +377,42 @@ int main()
 ## 구현
 >2중 for문 구현 시 time limit에 걸림
 ```c++
+#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
+#include <cstring>
 #include <algorithm>
+#include <string>
 using namespace std;
 
-int arr[100001]; 
+long int arr[100001];
 
 int main() {
-	int N;
-	cin >> N; 
-	for (int i = 0; i < N; ++i) 
-		cin >> arr[i]; 
-	sort(arr, arr + N);
+	//freopen("input.txt", "r", stdin);
+	int T;
+	cin >> T;
 
-	long long tot = -21e8;
-	long long fee = 21e8;
-	for (int i = 0; i < N; ++i) {
-		long long rev = (long long)arr[i] * (long long)(N - i);
-		if (rev > tot) {
-			tot = rev;
-			fee = arr[i]; 
+	for (int tc = 0; tc < T; tc++)
+	{
+		cin >> arr[tc];
+	}
+	sort(arr, arr + T);
+	long int maxresult = 0;
+	long int maxvalue = 0;
+	long int value = 0;
+
+	for (int i = 0; i < T; i++)
+	{
+		long int compare = arr[i] * (T - i); //정렬했으니 뒤로는 전부구매가능
+		if (compare > maxresult) {
+			maxresult = compare;
+			maxvalue = arr[i];
 		}
-		else if (rev == tot) {
-			if (arr[i] < fee)
-				fee = arr[i]; 
+		else if (compare == maxresult) {
+			maxvalue = min(maxvalue, arr[i]);
 		}
 	}
-	cout << tot << " " << fee; 
+	cout << maxresult << " " << maxvalue;
+
+	return 0;
 }
 ```
