@@ -280,17 +280,46 @@ int main() {
 ## 중요 String 사용하기
 
 - string.length(); // 스트링길이구하기
-- string1.find(string2) // string1안에서 string2있는지 체크, 없으면 -1 반환, 있으면 찾은 첫번째 인덱스반환
+- string1.find(string2) // string1안에서 string2있는지 체크, 없으면 -1, string::npos 반환, 있으면 찾은 첫번째 인덱스반환
 - pos1= string1.find(sample);
 - string1.find(sample,pos+1); // 찾은곳 이후부터 다시찾음, 한문장안에 여러 샘플 찾기 문제
-
+### 주요예제
 ```c++
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+#include <cstring>
 #include <string>
+#include <algorithm>
 
-int main(){
-	string arr;
-	int length = arr.length();
+using namespace std;
+
+int main()
+{
+	//freopen("input.txt", "r", stdin);
+	int result1 = 0;
+	int result2 = 0;
+	string a;
+	cin >> a;
+
+	for (int i = 0; i < a.length(); i++)
+	{
+		if (a[i] >= 'A'&&a[i] <= 'Z') {
+			a[i] = a[i] - 'A' + 'a';
+		}
+	}
+	size_t pos = a.find("pass");
+	while (pos != string::npos) {
+		result1 += 1;
+		pos = a.find("pass", pos + 1);
+	}
+
+	size_t pos2 = a.find("fail");
+	while (pos2 != string::npos) {
+		result2 += 1;
+		pos2 = a.find("fail", pos2 + 1);
+	}
+	double temp = (static_cast<double>(result1) / (result1 + result2)) * 100;
+	cout << temp << "%";
 }
-
 
 ```
