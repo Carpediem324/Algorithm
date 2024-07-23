@@ -373,6 +373,43 @@ int main()
 	return 0;
 }
 ```
+### string parsing 같은 문자로 _
+```cpp
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+#include <cstring>
+#include <string>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+
+int main()
+{
+	//freopen("input.txt", "r", stdin);
+
+	string arr;
+	string temp;
+	cin >> arr;
+	int count = 1;
+	size_t pos = 0;
+	
+
+	while (arr.find("_") != -1) {
+		pos = arr.find("_");
+		temp = arr.substr(0, pos);
+		cout << count<<"#"<<temp <<'\n';
+		int len = 0;
+		for (int i = arr.find("_"); arr[i] =='_'; i++)
+		{
+			len++;
+		}
+		arr = arr.substr(pos+len, arr.length()-pos-len+1);
+		count++;
+	}
+	cout <<count<<"#"<< arr;
+}
+```
 
 ## 구현
 >2중 for문 구현 시 time limit에 걸림
