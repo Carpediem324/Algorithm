@@ -3,14 +3,279 @@
 
 ## 2024.07-25 (목)
 
+
 ## 2024.07-24 (수)
+### 
 
-## 2024.07-23 (화)
-> 테스트
+---
+############################################
+---
+## 2024.07-23 (화) 벡터, 방향배열
+> 정적 배열은 매우 불편한다.
+> CRUD - Create, Read, Update ,Delete 생성, 읽기, 수정, 삭제
 
+### 1. vector
+- 크기를 정하지 않는다.
+- 동적할당. 배열이 훨씬 빠르다.
+- <type> 템플릿이라고 한다. string vector도 가능하다.
+- 1. v.push_back(값) : append랑 비슷
+- 2. v.pop_back() : pop과 비슷 하지만 return값은 없음. 끝에 삭제
+- 3. v.clear() : 안의 값을 다 비워줘;
+- 출력은 아래 예제와 같이
+- 시간이 매우 오래걸린다. 동적할당의 문제점
+- 시간초과 나올 확률이 높다.
+
+```c++
+#include <iostream>
+#include <cstring>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+int main() {
+	vector<char> v;
+	v.push_back('A');
+	v.push_back('B');
+	v.push_back('C');
+	for (int i = 0; i < v.size(); i++)
+	{
+		cout << v[i];
+	}
+	cout << '\n';
+	string a = "abcdddeeee";
+	for (char c : a) { // 범위 기반 for 문 사용
+		cout << c;
+	}
+	cout << '\n';
+	char arr[10] = "qwerqwer";
+	for (char c : arr) { // 범위 기반 for 문 사용
+		cout << c;
+	}
+	cout << '\n';
+	vector<string> v3 = { "Hello", "World", "C++" };
+
+	for (string s : v3) { //const string& s도가능
+		cout << s << " ";
+	}
+	cout << '\n';
+
+	vector<int> v4[3] = {
+		{1,2,3,4},
+	{3,5,6},
+	{1,1,1,1,2,3,4,5}
+	};
+
+	for (vector<int> c: v4 )
+	{
+		for (int a : c) {
+			cout << a << " ";
+		}
+		cout << '\n';
+	}
+	return 0;
+}
+```
+### 2. 구조체 벡터
+
+```c++
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+struct Student
+{
+	char name[10];
+	int age;
+};
+
+int main() {
+	Student st1 = { "데이비드",23 };
+	Student st2 = { "실비",30 };
+	
+	vector<Student> v ;
+	v.push_back(st1);
+	v.push_back(st2);
+
+	for (Student c : v)
+	{
+		cout << c.name;
+		cout << c.age;
+	}
+
+	return 0;
+}
+```
+### 3. 2차원 벡터
+
+> vector의 vector 가능은 하다
+
+> 하지만 보기 매우 힘드니 벡터 배열을 사용하자
+
+```c++
+int main()
+{
+	vector<int> v[3] = {
+		{1,2,3,4,5,6},
+	{3,6,5},
+	{1,1,1,2,3,4,5}
+	};
+
+	for (vector<int> tempv : v )
+	{
+		for (int c : tempv) {
+			cout << c << " ";
+		}
+		cout << '\n';
+	}
+
+}
+```
+
+### 방향배열
+
+- 동서남북
+> y와 x의 쌍을 이루기 위해 구조체 Point 사용
+
+
+```c++
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+#include <cstring>
+#include <string>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+
+int dy[4] = { -1,1,0,0 };
+int dx[4] = { 0,0,-1,1 };
+
+int direct[4][2] = {
+	{-1,0},
+	{1,0},
+	{0,-1},
+	{0,1}
+};
+
+int map[4][4] = {
+	{1,3,7,2},
+	{2,2,6,1},
+	{1,4,5,1},
+	{1,1,2,1}
+};
+
+struct Point
+{
+	int y;
+	int x;
+};
+int main()
+{
+	Point st = { 0,0 };
+
+	int total = 0;
+	for (int i = 0; i < 4; i++)
+	{
+		int ny = st.y + direct[i][0]; // y + dy[i]
+		int nx = st.x + direct[i][1]; // x + dx[i]
+
+
+		if (ny >= 0 && ny < 4 && nx >= 0 && nx < 4) {
+			total += map[ny][nx];
+		}
+	}
+	cout << total;
+}
+```
+
+### 방향백터 문제1) 가장 큰곳 찾기
+
+- map 배열을 하드코딩 해주세요.
+
+- 그리고 map에서 대각선 방향(왼쪽 위, 오른쪽 위, 왼쪽 아래, 오른쪽 아래)의 합이 가장 큰 값이 나오는 좌표(y, x)를 출력하세요.
+
+- 단, 대각선 방향의 합을 구하는 sum(y, x) 함수를 만들어서 사용해 주세요.
+
+- sum(y, x)는 특정 좌표 (y, x)에서 대각선 방향의 합을 반환하는 함수입니다.
+```c++
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+#include <cstring>
+#include <string>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+
+
+int direct[4][2] = {
+	{-1,-1},
+	{1,-1},
+	{-1,1},
+	{1,1}
+};
+
+int MAP[5][5] = {
+	{3, 3, 5, 3, 1},
+	{2, 2, 4, 2, 6},
+	{4, 9, 2, 3, 4},
+	{1, 1, 1, 1, 1},
+	{3, 3, 5, 9, 2}
+};
+
+struct Point
+{
+	int y;
+	int x;
+};
+
+int sum(Point p) {
+	int total=0;
+	for (int i = 0; i < 4; i++)
+	{
+		int ny = p.y + direct[i][0]; 
+		int nx = p.x + direct[i][1]; 
+
+
+		if (ny >= 0 && ny < 5 && nx >= 0 && nx < 5) {
+			total += MAP[ny][nx];
+		}
+	}
+	return total;
+}
+int main()
+{
+	Point st = { 0,0 };
+	Point result;
+	int maxvalue = 0;
+
+	for (int i = 0; i < 5; i++)
+	{
+		for (int j = 0; j < 5; j++)
+		{
+			st = { i,j };
+			if (sum(st) > maxvalue) {
+				maxvalue = sum(st);
+				result = st;
+			}
+		}
+	}
+	cout << result.y << " " << result.x;
+
+}
+```
+### 방향백터 문제2) 
+
+
+
+---
+############################################
+---
 ## 2024.07-22 (월) D.A.T
 > sort함수는 char array가 꽉차있으면 에러가 난다. 15개가 꽉차있다면 16으로 사이즈를 정해 제일 끝 칸을 비워야한다.
-### 1) DAT를 안쓰고 배열의 알파뱃 종류를 찾아내는 코드를 작성하세요
+### DAT 문제1) DAT를 안쓰고 배열의 알파뱃 종류를 찾아내는 코드를 작성하세요
 "A, D, B, F, A, D"
 > 나의 답
 ```c++
@@ -123,7 +388,7 @@ int main()
 ### 뭐가 안좋나?
 - 메모리낭비(공간낭비)
 
-### 2) 4 1 1 1 5 4 각각의 숫자가 몇개인지 출력하시오
+### DAT 문제2) 4 1 1 1 5 4 각각의 숫자가 몇개인지 출력하시오
 
 ```c++
 #include <iostream>
@@ -146,7 +411,7 @@ int main()
 	}
 }
 ```
-### 3) 8글자의 대문자 알파벳으로 구성된 문장을 입력 하세요. 입력한 문장에서 가장 많이 사용된 알파벳을 출력하세요.
+### DAT 문제3) 8글자의 대문자 알파벳으로 구성된 문장을 입력 하세요. 입력한 문장에서 가장 많이 사용된 알파벳을 출력하세요.
 
 ```c++
 #include <iostream>
@@ -181,7 +446,7 @@ int main()
 }
 ```
 
-### 4) 5 x 3에 채워진 알파벳을 정렬하여 한 줄로 공백 없이 출력합니다.
+### DAT 문제4) 5 x 3에 채워진 알파벳을 정렬하여 한 줄로 공백 없이 출력합니다.
 
 ```c++
 #define _CRT_SECURE_NO_WARNINGS

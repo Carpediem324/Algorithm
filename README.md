@@ -416,3 +416,58 @@ int main() {
 	return 0;
 }
 ```
+
+### 오목 판정하기
+
+```c++
+#include <iostream>
+
+using namespace std;
+
+int arr[20][20];
+// 우측, 하단, 우하단 대각선, 좌하단 대각선
+int dy[4] = { 0, 1, 1, -1 };
+int dx[4] = { 1, 0, 1, 1 };
+
+bool check(int y, int x, int dir) {
+	// 육목 체크
+	// 1. 6칸 째 위치에 같은 색이 있다면 무조건 실패
+	if (arr[y][x] == arr[y + 5 * dy[dir]][x + 5 * dx[dir]]) return false;
+	// 2. 바로 이전 위치에 같은 색이 있다면 무조건 실패
+	if (arr[y][x] == arr[y - dy[dir]][x - dx[dir]]) return false;
+
+	// 5칸 확인
+	for (int i = 0; i < 5; i++) {
+		// 하나라도 다르다면 실패
+		if (arr[y][x] != arr[y + i * dy[dir]][x + i * dx[dir]]) return false;
+	}
+
+	return true;
+}
+
+int main() {
+	// 입력
+	for (int i = 1; i < 20; i++) {
+		for (int j = 1; j < 20; j++) {
+			cin >> arr[i][j];
+		}
+	}
+
+	for (int i = 1; i < 20; i++) {
+		for (int j = 1; j < 20; j++) {
+			// 돌이 놓여져 있다면
+			if (arr[i][j]) {
+				for (int dir = 0; dir < 4; dir++) {
+					bool result = check(i, j, dir);
+					if (result) {
+						cout << arr[i][j] << '\n' << i << " " << j;
+						return 0;
+					}
+				}
+			}
+		}
+	}
+	cout << "0";
+	return 0;
+}
+```
