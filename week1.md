@@ -4,10 +4,79 @@
 ## 2024.07-25 (목)
 
 
-## 2024.07-24 (수)
-### 
-테스트테스트
+## 2024.07-24 (수) String parsing
+> c++은 모든 c를 사용할수있다.
 
+>c는 string이 없다 / 절차지형언어
+
+```c++
+#include <cstring>
+#include <string.h> //똑같다
+```
+
+### cstring사용하기
+
+- strlen(문자열) : 길이 반환
+- strstr(문자열, 찾고싶은문자) : 문자열에서 찾은문자 주소반환, 없으면? NULL반환
+- strcmp(문자열, 문자열) : 같으면 0
+- strcpy(문자열, 바꾸고싶은내용) : 목적지에 문자열 넣음(기존문자열 남아있지만 0번부터넣음)
+- strcat(문자열, 내용) : 문자열의 '\0'부터 내용을 뒤로 추가함.
+
+```c++
+int main()
+{
+	//freopen("input.txt", "r", stdin);
+
+	char text[50] = "Hello world!";
+
+	cout << text << '\n';
+	cout << "len: " << strlen(text)<<'\n';
+
+	strcpy(text, "hi");
+	cout << text << '\n';
+	return 0;
+}
+```
+> 중요한부분 strcpy해도 뒤에 내용은 사라지지않는다. 하지만 끝점은 '\0'으로 판단
+
+```c++
+int main()
+{
+	//freopen("input.txt", "r", stdin);
+
+	char text[50] = "Hello world!";
+
+	cout << text << '\n';
+	cout << "len: " << strlen(text)<<'\n';
+
+	cout << strstr(text, "world");
+	return 0;
+}
+```
+> strstr 사용예제
+
+> strlen, strstr, strcpy, strcmp, strcat 다섯가지 c함수 기억.
+
+> 길이, 찾기, 복사, 비교, 추가
+
+### C++에서는? String
+
+string str
+>클래스 안의 함수들은 메서드라고 한다. 객체지향 언어는 메서드.
+
+- str.size(), str.length()   :  두개는 별 차이 없다. 벡터는 size함수임.
+- 
+
+```c++
+	string text = "Hello world";
+	text = "hi";
+	cout << text;
+	string text2 = "hi";
+	if (text == text2) {
+		cout << "같다";
+	}
+```
+> 이게 된다. strcpy처럼 뒤에 남지도 않음.
 
 
 
