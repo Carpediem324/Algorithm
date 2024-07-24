@@ -65,7 +65,15 @@ string str
 >클래스 안의 함수들은 메서드라고 한다. 객체지향 언어는 메서드.
 
 - str.size(), str.length()   :  두개는 별 차이 없다. 벡터는 size함수임.
-- 
+- str.find("찾는거") : 찾는 문자의 첫번째 주소 반환
+- str.substr(시작주소, 길이) : 시작주소부터 길이만큼 자름
+- str.erase(시작주소,길이) : 시작주소부터 길이만큼 자름
+- str.insert(시작주소, 내용) : 시작주소부터 내용 넣음
+- stoi(str) : string to number 스트링을 int로 바꿔줌
+- to_string(intNum) : intNum을 string으로 바꿔줌
+- str + str : 그냥 더하면 된다. strcat안해도된다.
+
+
 
 ```c++
 	string text = "Hello world";
@@ -78,7 +86,12 @@ string str
 ```
 > 이게 된다. strcpy처럼 뒤에 남지도 않음.
 
+### memset과 memcpy
 
+>string은 memset안쓴다. 그냥 = "";하면되니까
+
+- memset(arr, 0, sizeof(arr)) : cstring 안에있는 memset, 0이랑 -1 초기화만 된다.
+- memcpy(arr1,arr2,sizeof(arr1)) : arr1에 arr2의 내용을 size만큼 넣는다.
 
 
 ---
