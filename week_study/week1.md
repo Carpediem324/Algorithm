@@ -159,11 +159,99 @@ int main()
 ```
 > 대소문자는 대문자가 값이 더 작다. 정렬하려면 섞지말고 전부다 대문자, 소문자로 변환 후 정렬
 
-### greedy
+### 커스텀 정렬
+내가 원하는대로 정렬
 
----
-############################################
----
+- 길이가 다른 경우 짧은 순.
+- 길이가 같은 경우 사전 순.
+> 내가 원하는 기준을 함수로 쓴다.
+스트링 비교하면 제일 앞의 값비교한다. 같다면 다음글자
+
+```c++
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+#include <cstring>
+#include <string>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+
+struct Member {
+	string name;
+	int age;
+};
+
+bool cp(Member a, Member b) {
+	return a.age > b.age;
+}
+int main()
+{
+	Member members[3] = {
+		{"조니",40},
+		{"실비",20},
+		{"나나",4},
+	};
+	sort(members, members + 3, cp);
+
+	return 0;
+}
+```
+> 원하는 비교방법 함수로 생성하고 sort함수의 3번째 인자로 넣음. 
+
+>매개변수는 전 후이고, sort에 넣을 때는 함수이름만.
+### 커스텀 정렬 중요 예제
+
+```c++
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+#include <cstring>
+#include <string>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+
+
+
+bool cp(string a, string b) {
+	
+	if (a.length() == b.length()) {
+		return a < b;
+	}
+	
+	return a.length() < b.length();
+	
+}
+int main()
+{
+	int T;
+	cin >> T;
+	string arr[100];
+
+	for (int i = 0; i < T; i++)
+	{
+		cin >> arr[i];
+	}
+	sort(arr, arr+T, cp);
+
+	for (int i = 0; i < T; i++)
+	{
+		cout << arr[i] << '\n';
+	}
+	return 0;
+}
+```
+
+### greedy(탐욕)
+
+> 당장의 눈앞의 이익만 잘 쫓는다.
+> 각각의 시행이 독립적일 때 효과적
+
+
+
+<hr style="border: 5px solid red; ">
+
 ## 2024.07-24 (수) String parsing
 > c++은 모든 c를 사용할수있다.
 
@@ -255,7 +343,8 @@ string str
 
 
 ---
-############################################
+<hr style="border: 5px solid red;">
+
 ---
 ## 2024.07-23 (화) 벡터, 방향배열
 > 정적 배열은 매우 불편한다.
@@ -518,7 +607,8 @@ int main()
 
 
 ---
-############################################
+<hr style="border: 5px solid red;">
+
 ---
 ## 2024.07-22 (월) D.A.T
 > sort함수는 char array가 꽉차있으면 에러가 난다. 15개가 꽉차있다면 16으로 사이즈를 정해 제일 끝 칸을 비워야한다.
