@@ -248,6 +248,8 @@ int main()
 > 당장의 눈앞의 이익만 잘 쫓는다.
 > 각각의 시행이 독립적일 때 효과적
 
+### 잔돈반환 
+
 
 
 <hr style="border: 5px solid red; ">
