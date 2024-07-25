@@ -3,11 +3,167 @@
 
 
 ## 2024.07-25 (목) Sort, Greedy 
+> 정렬은 기본이다. 하지만 라이브러리 쓴다.
 
 ### sort 정렬 $$ n^2 $$
 
-### sort 정렬  $$ nlog2(n) $$
+> 느린데 왜 알아야 할까?
 
+1. 데이터셋이 작다면 쓸만하다.
+2. 라이브러리 못 쓸때 쓸만하다. 생각하기 쉬움.
+3. 가끔 구현하라고 한다.
+
+- 버블정렬
+> 바로 옆에 것과 계속 교환하여 최댓값을 가장 오른쪽으로 미는 형태.
+```c++
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+#include <cstring>
+#include <string>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+
+int main()
+{
+	int temp;
+	//freopen("input.txt", "r", stdin);
+	int arr[10] = { 3,4,5,6,2,1,5,4,3,1 };
+	int len = sizeof(arr) / sizeof(int);
+	for (int i = len - 1; i >= 0; i--)
+	{
+		for (int j = 0; j <= i-1; j++)
+		{
+			if (arr[j] > arr[j + 1]) {
+				temp = arr[j];
+				arr[j] = arr[j + 1];
+				arr[j + 1] = temp;
+			}
+		}
+	}
+	for (int i = 0; i < 10; i++)
+	{
+		cout << arr[i] << " ";
+	}
+	return 0;
+}
+```
+- 선택정렬
+> 최솟값을 찾아서 앞에서부터 넣는다.
+
+- 삽입정렬
+> 키값을 차례대로 정해서 뒤에서부터비교한다. 작다면 삽입하고 그값은 뒤로보낸다.
+
+> 한개씩 넣으면서 기존값과 비교한다고 생각해야함.
+
+### sort 정렬  $$ n \log_2n $$
+
+> c++ sort 라이브러리는 퀵정렬
+
+> 파이썬은 병합정렬
+
+- 병합정렬 (merge sort) - 폰 노이만 구조
+> 계속 나눈다. 한 개 될때까지. 분할정복 알고리즘
+
+> 구현하기 매우 어렵다. devide, merge
+- 힙정렬
+
+- 퀵정렬
+> 젤앞은 pivot, 피봇기준 좌우 
+> 나눈 두부분 계속 반복.
+
+### sort 라이브러리 사용하자! (중요) c++
+
+- 배열의 사이즈구하기
+> 벡터.size() 스트링.length() 스트링.size()
+```c++
+int len = sizeof(arr)/sizeof(arr[0]);
+```
+
+- sort함수 사용하기
+> #include <algorithm>
+
+min, max, sort 포함 라이브러리
+
+```cpp
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+#include <cstring>
+#include <string>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+
+int main()
+{
+	int temp;
+	//freopen("input.txt", "r", stdin);
+	int arr[10] = { 3,4,5,6,2,1,5,4,3,1 };
+	int len = sizeof(arr) / sizeof(arr[0]);
+	sort(arr,arr+len);//배열의 시작주소, 끝주소
+	for (int i = 0; i < 10; i++)
+	{
+		cout << arr[i] << " ";
+	}
+	return 0;
+}
+```
+vector 정렬
+```cpp
+int main()
+{
+	int temp;
+	vector<int> v = { 4,2,5,3,10 };
+	sort(v.begin(),v.end());
+	for (int i = 0; i < v.size(); i++)
+	{
+		cout << v[i] << " ";
+	}
+	return 0;
+}
+```
+### 역순 정렬(DESC)
+```cpp
+int main()
+{
+	int temp;
+	vector<int> v = { 4,2,5,3,10 };
+	sort(v.begin(),v.end(),greater<int>());
+
+	int arr[5] = { 1,2,3,4,5 };
+	sort(arr, arr + (sizeof(arr) / sizeof(arr[0])), greater<int>());
+
+	return 0;
+}
+```
+### string 정렬하기
+```cpp
+int main()
+{
+	string str[5] = {
+		"bddcdc",
+		"cbccd",
+		"ebacc",
+		"adcsc",
+		"Abccf"
+	};
+	sort(str, str + 5, greater<string>());
+	for (int i = 0; i < 5; i++)
+	{
+		cout << str[i] << " ";
+	}
+	return 0;
+}
+```
+> 대소문자는 대문자가 값이 더 작다. 정렬하려면 섞지말고 전부다 대문자, 소문자로 변환 후 정렬
+
+### greedy
+
+---
+############################################
+---
 ## 2024.07-24 (수) String parsing
 > c++은 모든 c를 사용할수있다.
 
