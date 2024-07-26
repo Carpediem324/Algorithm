@@ -1,9 +1,73 @@
 # 매일 알고리즘 정리
-## 2024.07-26 (금)
+## 2024.07-26 (금) Recursion
 
+재귀 - Recursion
+### 함수 재귀.
+
+```c++
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+#include <cstring>
+#include <string>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+int arr[6];
+void func(int level) {
+	
+	if (level == 5) {
+		cout << arr[level] << " ";
+		return;
+	}
+	cout << arr[level] << " ";
+	func(level + 1);
+	cout << arr[level] << " ";
+}
+int main()
+{
+
+
+	for (int i = 0; i < 6; i++)
+	{
+		cin >> arr[i];
+	}
+
+	func(0);
+
+
+	return 0;
+}
+```
+> 자기자신을 호출하는 함수. 재귀.
+
+ex) 1 2 3 4 5 6 입력
+    1 2 3 4 5 6 5 4 3 2 1  출력되는 코드를 작성하시오
+
+### *3재귀
+
+```c++
+void func(int level){
+	if(level==3){
+		return;
+	}
+	for(int i=0;i<3;i++){
+		func(level+1);
+	}
+}
+---
+3배로 증가한다.1->3>->9>...
+순서중요
+
+
+---
+<hr style="border: 5px solid red; ">
+
+---
 
 ## 2024.07-25 (목) Sort, Greedy 
 > 정렬은 기본이다. 하지만 라이브러리 쓴다.
+
 
 ### sort 정렬 $$ n^2 $$
 
@@ -251,8 +315,10 @@ int main()
 ### 잔돈반환 
 
 
-
+---
 <hr style="border: 5px solid red; ">
+
+---
 
 ## 2024.07-24 (수) String parsing
 > c++은 모든 c를 사용할수있다.
