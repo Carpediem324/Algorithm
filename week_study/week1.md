@@ -55,6 +55,7 @@ void func(int level){
 		func(level+1);
 	}
 }
+```
 ---
 3배로 증가한다.1->3>->9>...
 순서중요
@@ -65,7 +66,9 @@ void func(int level){
 
 ---
 
-## 2024.07-25 (목) Sort, Greedy 
+
+## 2024.07-25 (목) Sort, Greedy
+
 > 정렬은 기본이다. 하지만 라이브러리 쓴다.
 
 
@@ -146,11 +149,13 @@ int len = sizeof(arr)/sizeof(arr[0]);
 ```
 
 - sort함수 사용하기
-> #include <algorithm>
+
+```cpp
+#include <algorithm>
 
 min, max, sort 포함 라이브러리
 
-```cpp
+
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <cstring>
@@ -175,6 +180,7 @@ int main()
 }
 ```
 vector 정렬
+
 ```cpp
 int main()
 {
