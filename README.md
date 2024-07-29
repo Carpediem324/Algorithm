@@ -1,5 +1,5 @@
 # 알고리즘 총정리 - 매주 일요일 업데이트
-
+>240728 update
 # DAT
 > Direct Access Table : 즉각 접근 자료구조
  
