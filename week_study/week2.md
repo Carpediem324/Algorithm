@@ -7,6 +7,110 @@
 
 ## 2024.07-30 (화) 백트래킹2
 
-## 2024.07-29 (월) 백트래킹1
+## 2024.07-29 (월) 백트래킹1 🤔🤔🤔
 
-백백
+> recursion의 연장선
+
+### **Path**
+- 경로기억하기 -> 왔던 길을 기억해야한다.
+
+```c++
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+#include <cstring>
+#include <string>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+int N;
+
+int path[2] = { -1, -1 };
+
+void func(int level) {
+	if (level == N) return;
+
+	for (int i = 0; i < 2; i++)
+	{
+		path[level] = i;
+		func(level + 1);
+		path[level] = -1;
+
+	}
+	
+}
+int main() {
+	//freopen("input.txt", "r", stdin);
+	
+	cin >> N;
+	func(0);
+
+}
+```
+> path에 내 위치 넣고 반환하고...
+
+
+### path를 매개변수로 넣으면 되지않냐?
+
+-> 배열은 call by reference 주소를 넘긴다.
+손상이 된다.
+
+그냥 전역변수로 선언해라 -> 어차피 유지안된다.
+
+기록했다가 원상복구하고. 반복
+
+### Path를 구해서 어디에쓰냐?
+
+경로를 구해서 가지수 구하기.
+
+### 가지치기의 두가지 방법.
+
+### 1. for loop 안에서 조건이 맞으면 continue처리
+```c++
+    for (int i = 0; i < 6; i++)
+    {
+        if(i==3){ //3이면 넘긴다.
+            continue; 
+        }
+        path[level] = i;
+        func(level + 1, M);
+        path[level] = -1;
+    }
+```
+
+### 2. 들어가고 즉시 나간다. 재귀함수 최 상단에 if로 처리 return
+```c++
+    if(level==3){ //3이면 넘긴다.
+        return;
+    }
+    for (int i = 0; i < 6; i++)
+    {
+        
+        path[level] = i;
+        func(level + 1, M);
+        path[level] = -1;
+    }
+```
+
+### visited 매우 중요
+
+> 왔던 곳이면 가지마라. 
+
+```c++
+    for (int i = 0; i < 6; i++)
+    {
+        if (visited[i] == 1) {
+            continue;
+        }
+        visited[i] = 1;
+        path[level] = i;
+        func(level + 1, M);
+        path[level] = -1;
+        visited[i] = 0;
+    }
+```
+
+### 2차원 visited - 지나온 길(맵)
+visited[3][4] ==1; 
+
+### 문제에 추가예정.
