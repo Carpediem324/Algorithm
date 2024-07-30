@@ -1,7 +1,6 @@
 <h1> 1주차 복습 </h1>
 
 # DAT
-<<<<<<< Updated upstream
 > Direct Access Table : 즉각 접근 자료구조
  
 key 값을 배열의 인덱스로 사용하는 기법이다. 매우 유용하고 중요한 기법이다.
@@ -28,11 +27,6 @@ for(int i=0; i<5;i++){
 
 - 공간차지를 많이한다. 하지만 이는 생각할 이유가 없다. 코딩테스트를 준비한다면 Time Limit이 매우 중요하기 때문이다.
 
-=======
-> Direct Address Table
-> 값을 인덱스값으로 하는 테이블을 만들어 사용하는 기법이다.
-만약 ke
->>>>>>> Stashed changes
 
 # Direct
 > 방향배열을 이용하여 전체 탐색하는 것이다.
