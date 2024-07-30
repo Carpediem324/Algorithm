@@ -9,6 +9,88 @@
 
 백트래킹 - 결과를 알고 재귀함수의 탈출조건을 마련하는 것이 백트래킹이라고 생각...
 
+###복습1: 주사위를 N번 던져서 M에 따른결과 출력
+
+> 주사위, 카드문제는 기본 중에 기본이다. 
+ 
+> 잊지 않도록 반복학습하자.
+```c++
+#define _CRT_SECURE_NO_WARINGS
+#include <iostream>
+#include <cstring>
+#include <algorithm>
+#include <string>
+#include <cmath>
+#include <vector>
+
+using namespace std;
+int M;
+int N;
+int dice[6] = { 1,2,3,4,5,6 };
+int path[10] = { -1 };
+int isvisited[6];
+void func(int level, int M)
+{
+	if (level == N) {
+		for (int i = 0; i < N; i++) //Path에 저장된 내 길을 출력
+		{
+			cout << path[i] << " ";
+		}
+		cout << '\n';
+		return;
+	}
+
+	if (M == 1) { //1번모드일때 , 모든 경우의 수 출력
+		for (int i = 0; i < 6; i++)
+		{
+
+			path[level] = dice[i];
+			func(level + 1, M);
+			path[level] = 0;
+		}
+	}
+	else if (M == 2) {
+		for (int i = 0; i < 6; i++)
+		{
+			if (level != 0 && path[level - 1] >dice[i]) {
+				continue;
+			}
+			path[level] = dice[i];
+			func(level + 1, M);
+			path[level] = 0;
+		}
+
+	}
+	else if (M == 3) {
+		for (int i = 0; i < 6; i++)
+		{
+			if (isvisited[i] == 1) {
+				continue;
+			}
+			isvisited[i] = 1;
+			path[level] = dice[i];
+			func(level + 1, M);
+			path[level] = 0;
+			isvisited[i] = 0;
+		}
+	}
+
+}
+int main() {
+
+	cin >> N >> M;
+
+
+	func(0, M);
+
+
+
+	return 0;
+
+
+	return 0;
+}
+```
 
 
 ## 2024.07-29 (월) 백트래킹1 🤔🤔🤔
