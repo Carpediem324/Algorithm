@@ -9,6 +9,7 @@ int resultcount = 0;
 void func(int level) {
 	if (level == N) {
 		resultcount++;
+        return;
 	}
 
 	for (int i = 1; i <= N; i++)

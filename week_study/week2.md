@@ -5,7 +5,7 @@
 
 ## 2024.07-31 (수) DFS1
 
-## 2024.07-30 (화) 백트래킹2
+## 2024.07-30 (화) 백트래킹2 🤔🤔
 
 백트래킹 - 결과를 알고 재귀함수의 탈출조건을 마련하는 것이 백트래킹이라고 생각...
 
@@ -86,14 +86,57 @@ int main() {
 
 
 	return 0;
-
-
-	return 0;
 }
 ```
+### N-Queen 매우 중요하다. 기본중의 기본
 
+- N을 입력받는다
+- N*N 체스판에 퀸을 N개 두는 경우의 수는 몇개인가?
+- 퀸은 상하좌우,대각선 모두 이동가능하다.| \ / -
 
-## 2024.07-29 (월) 백트래킹1 🤔🤔🤔
+> 컨셉을 잘잡아야한다. N-castle의 확장판
+
+```c++
+#include <iostream>
+
+using namespace std;
+
+int visited[15]; // 열 방문 확인
+int slash[30]; // '/' 대각선 방문 확인
+int backslash[30]; // '\' 대각선 방문 확인
+int N;
+int resultcount = 0;
+
+void func(int level) {
+	if (level == N) {
+		resultcount++;
+		return;
+	}
+
+	for (int i = 0; i < N; i++) {
+		if (visited[i] || slash[level + i] || backslash[level - i + N - 1]) {
+			continue;
+		}
+
+		visited[i] = slash[level + i] = backslash[level - i + N - 1] = 1;
+		func(level + 1);
+		visited[i] = slash[level + i] = backslash[level - i + N - 1] = 0;
+	}
+}
+
+int main() {
+	cin >> N;
+
+	func(0);
+
+	cout << resultcount;
+	return 0;
+}
+
+```
+너무어렵다. 이해하도록 노력해보자
+
+## 2024.07-29 (월) 백트래킹1 🤔🤔
 
 > recursion의 연장선
 
