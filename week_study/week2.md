@@ -3,9 +3,257 @@
 
 ## 2024.08-01 (목) DFS2
 
-## 2024.07-31 (수) DFS 깊이 우선 탐색
+## 2024.07-31 (수) 트리, DFS, 그래프
 
-DFS - 깊이 우선 탐색.
+이전까지의 재귀는 트리구조. 지금 배우는건 그래프 (시작점이 level이 아님.)
+
+정점(노드), 간선(엣지), 비용(코스트)
+
+그래프에서 DFS는 무한루프에 빠질 수 있다.
+- visited : 방문했던 곳은 다시 가지 않는다.
+
+```bash
+0   0 1 1 1
+1   1 0 0 1
+2   0 1 0 1
+3   0 0 0 0
+```
+> 각 노드들이 갈 수있는 노드에 1로 체크 자기자신은 못가는 경우.
+
+```bash
+   0  1  2  3
+
+0  0 15 10 27
+1  2  0  0  1
+2  0  5  0  8
+3  0  0  0  0   
+```
+> 가중치 그래프 행렬
+
+### 그래프의 경로 최댓값, 최솟값 구하기
+> 간선의 가중치는 모두 1이다. st - > en가는 경로의 최솟값 최댓값
+```c++
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+#include <algorithm>
+#include <climits>
+
+using namespace std;
+
+int nodeCnt;
+int arr[100][100];
+int st, en;
+int minCnt = INT_MAX;
+int maxCnt;
+int cnt;
+int visited[100];
+void func(int now) {
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+#include <algorithm>
+#include <climits>
+
+using namespace std;
+
+int nodeCnt;
+int arr[100][100];
+int st, en;
+int minCnt = INT_MAX;
+int maxCnt;
+
+int visited[100];
+void func(int now, int cnt) {
+	
+	if (now == en) {
+		minCnt = min(minCnt, cnt);
+		maxCnt = max(maxCnt, cnt);
+		return;
+	}
+
+	for (int i = 0; i < nodeCnt; i++)
+	{
+		if (visited[i] == 1)continue;
+		if (arr[now][i] == 0)continue;
+		
+
+		visited[i] = 1;
+		func(i, cnt+1);
+		visited[i] = 0;
+
+
+	}
+
+
+}
+
+int main() {
+
+	freopen("input.txt", "r", stdin);
+	cin >> nodeCnt;
+	for (int i = 0; i < nodeCnt; i++)
+	{
+		for (int j = 0; j < nodeCnt; j++)
+		{
+			cin >> arr[i][j];
+		}
+	}
+
+	cin >> st >> en;
+	visited[st] = 1; //첫시작 방문처리
+	func(st, 0);
+	cout << minCnt << '\n' << maxCnt;
+
+	return 0;
+}
+```
+
+### 가중치 그래프의 경로 최댓값, 최솟값 구하기
+>  st - > en가는 경로의 최솟값 최댓값
+
+```c++
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+#include <algorithm>
+#include <climits>
+
+using namespace std;
+
+int nodeCnt;
+int arr[100][100];
+int st, en;
+int minCnt = INT_MAX;
+int maxCnt;
+
+int visited[100];
+void func(int now, int sum) {
+	
+	if (now == en) {
+		minCnt = min(minCnt, sum);
+		maxCnt = max(maxCnt, sum);
+		return;
+	}
+
+	for (int i = 0; i < nodeCnt; i++)
+	{
+		if (visited[i] == 1)continue;
+		if (arr[now][i] == 0)continue;
+		
+
+		visited[i] = 1;
+		func(i, sum + arr[now][i]);
+		visited[i] = 0;
+
+
+	}
+
+
+}
+
+int main() {
+
+	freopen("input.txt", "r", stdin);
+	cin >> nodeCnt;
+	for (int i = 0; i < nodeCnt; i++)
+	{
+		for (int j = 0; j < nodeCnt; j++)
+		{
+			cin >> arr[i][j];
+		}
+	}
+
+	cin >> st >> en;
+	visited[st] = 1; //첫시작 방문처리
+	func(st, 0);
+	cout << minCnt << '\n' << maxCnt;
+
+	return 0;
+}
+
+```
+### 벡터 사용하기
+
+> 행렬으로 하는 방법은 메모리 낭비가 있다
+
+> push_back, pop_back
+```bash
+v[0] : 1,2,3
+v[1] : 0,3
+v[2] : 1,3
+```
+
+입력이 행렬로 들어오면 그냥 행렬쓰자
+
+하지만 
+```bash
+0, 1
+0, 2
+0, 3
+```
+이런식으로 입력이 들어오면 벡터사용이 유리하다.
+
+입력형식에 따라 맞는 것 사용하자.
+
+### 가중치 없는 그래프의 벡터 사용하기
+
+```c++
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+#include <algorithm>
+#include <climits>
+#include <vector>
+#include <string>
+#include <cmath>
+#include <cstring>
+
+using namespace std;
+
+int nodeCnt, edgeCnt;
+vector<int> v[100];
+
+int st, en;
+int visited[100];
+int minCnt = INT_MAX;
+int maxCnt;
+
+void func(int now, int cnt) {
+	if (now == en) {
+		minCnt = min(minCnt, cnt);
+		maxCnt = max(maxCnt, cnt);
+		return;
+	}
+
+	for (int i = 0; i < v[now].size(); i++)
+	{
+		int to = v[now][i];
+		if (visited[to] == 1)continue;
+		
+		visited[to] = 1;
+		func(to, cnt + 1);
+		visited[to] = 0;
+	}
+}
+
+int main() {
+	freopen("input.txt", "r", stdin);
+	
+	cin >> nodeCnt>>edgeCnt;
+	for (int i = 0; i < edgeCnt; i++)
+	{
+		int from;
+		int to;
+		cin >> from>>to;
+		v[from].push_back(to);
+	}
+
+	cin >> st >> en;
+	visited[st] = 1;
+	func(st, 0);
+
+	cout << minCnt << '\n' << maxCnt;
+	return 0;
+}
+```
+
 
 ## 2024.07-30 (화) 백트래킹2 🤔🤔
 
