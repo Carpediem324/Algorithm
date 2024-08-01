@@ -13,7 +13,7 @@ struct Point
 	int y;
 	int x;
 };
-int sum;
+
 int ans;
 int DAT[101];
 
@@ -30,7 +30,7 @@ void init()
 	memset(MAP, 0, sizeof(MAP));
 	memset(DAT, 0, sizeof(DAT));
 	ans = -1;
-	sum = 0;
+
 }
 
 void input()
@@ -41,9 +41,9 @@ void input()
 			cin >> MAP[i][j];
 }
 
-void dfs(Point cp, Point sp, int dir, int isSp)
+void dfs(Point cp, Point sp, int dir, int sum)
 {
-	if (!isSp && cp.y == sp.y && cp.x == sp.x) //현재점이 초기점과 같다면, 처음이아니고
+	if (sum>0 && cp.y == sp.y && cp.x == sp.x) //현재점이 초기점과 같다면, 처음이아니고
 	{
 		ans = max(ans, sum);
 		return;
@@ -59,16 +59,18 @@ void dfs(Point cp, Point sp, int dir, int isSp)
 		return;
 
 	DAT[MAP[np.y][np.x]] = 1;
-	sum++;
+
 
 	if (dir < 3)//회전수가 끝까지 0,1,2중에 하나라면 돌려봄 3에서는 못돌린다
 	{
-		dfs(np, sp, dir+1, 0);
+
+		dfs(np, sp, dir + 1, sum+1);
+
 	}
-	dfs(np, sp, dir, 0);
+	dfs(np, sp, dir, sum+1);
 	DAT[MAP[np.y][np.x]] = 0;
 
-	sum--;
+
 }
 void solve()
 {
@@ -76,7 +78,7 @@ void solve()
 	{
 		for (int j = 0; j < N; j++)
 		{
-			dfs({ i, j }, { i, j }, 0, 1);//처음에만 스타팅포인트라고 4번째 파라미터 1로넣음
+			dfs({ i, j }, { i, j }, 0, 0); //현재좌표, 시작좌표, 방향, sum
 		}
 	}
 }
