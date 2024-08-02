@@ -1,21 +1,86 @@
 # 매일 알고리즘 정리
+
 ## 2024.08-02 (금) BFS 넓이우선탐색
 
 넓이우선탐색
+
 <p align="center">
   <img src="../imgs/graph.PNG">
 </p>
 
 DFS는 0 1 3 1 4 1 0 2 5 2 6 2 0 으로 탐색한다
-BFS는 0 1 2 3 4 5 6 으로 돈다. 
+
+BFS는 0 1 2 3 4 5 6 으로 돈다.
+
 - 속도가 훨씬 빠르다.
 
-```c++
+### Queue
 
+Queue가 비면 무한루프가 끝난다.
+
+1. 0넣음
+2. 0나감
+3. 1, 2 들어감 Queue가 빌 때까지 내보냄
+4. 1나감, 1이 갈 수 있는 곳 확인 0,3,4 / 0은 visited에 걸림 큐에 3,4 추가
+5. 2나감, 2가 갈 수 있는 곳 확인 0,5,6 / 0은 visited에 걸림 큐에 5,6 추가
+6. 현재 큐
+
+<table>
+<tr>
+<th>입구</th>
+<td>3 4 5 6</td>
+<th>출구</th>
+</tr>
+</table>
+
+### Queue자료구조
+- q.front() : 맨 앞에 있는것 확인(리턴 O)
+- q.push() : 맨뒤에 추가
+- q.pop() : 맨 앞에 있는것 삭제(리턴 X)
+- q.empty() : 비어있는지 확인
+
+
+```c++
+#include <iostream>
+#include <queue>
+using namespace std;
+
+int visited[7];
+int arr[7][7] = {
+ 0, 1, 1, 0, 0, 0, 0,
+ 1, 0, 0, 1, 1, 0, 0,
+ 1, 0, 0, 0, 0, 1, 1,
+ 0, 1, 0, 0, 0, 0, 0,
+ 0, 1, 0, 0, 0, 0, 0,
+ 0, 0, 1, 0, 0, 0, 0,
+ 0, 0, 1, 0, 0, 0, 0,
+};
+
+void bfs(int st) {
+	queue<int> q;
+	visited[st] = 1;
+	q.push(st);
+	while (!q.empty()) {
+		int now = q.front();
+		q.pop();
+		for (int i = 0; i < 7; i++)
+		{
+			if (visited[i] == 1) continue;
+			if (arr[now][i] == 0)continue;
+			visited[i] = 1;
+			q.push(i);
+		}
+		cout << now << " ";
+	}
+
+}
+
+int main() {
+	bfs(0);
+}
 ```
 
-
-## 2024.08-01 (목) DFS2 
+## 2024.08-01 (목) DFS2
 
 ### 2105. [모의 SW 역량테스트] 디저트 카페
 
@@ -34,6 +99,7 @@ BFS는 0 1 2 3 4 5 6 으로 돈다.
 정점(노드), 간선(엣지), 비용(코스트)
 
 그래프에서 DFS는 무한루프에 빠질 수 있다.
+
 - visited : 방문했던 곳은 다시 가지 않는다.
 
 ```bash
@@ -42,6 +108,7 @@ BFS는 0 1 2 3 4 5 6 으로 돈다.
 2   0 1 0 1
 3   0 0 0 0
 ```
+
 > 각 노드들이 갈 수있는 노드에 1로 체크 자기자신은 못가는 경우.
 
 ```bash
@@ -50,12 +117,15 @@ BFS는 0 1 2 3 4 5 6 으로 돈다.
 0  0 15 10 27
 1  2  0  0  1
 2  0  5  0  8
-3  0  0  0  0   
+3  0  0  0  0
 ```
+
 > 가중치 그래프 행렬
 
 ### 그래프의 경로 최댓값, 최솟값 구하기
+
 > 간선의 가중치는 모두 1이다. st - > en가는 경로의 최솟값 최댓값
+
 ```c++
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
@@ -87,7 +157,7 @@ int maxCnt;
 
 int visited[100];
 void func(int now, int cnt) {
-	
+
 	if (now == en) {
 		minCnt = min(minCnt, cnt);
 		maxCnt = max(maxCnt, cnt);
@@ -98,7 +168,7 @@ void func(int now, int cnt) {
 	{
 		if (visited[i] == 1)continue;
 		if (arr[now][i] == 0)continue;
-		
+
 
 		visited[i] = 1;
 		func(i, cnt+1);
@@ -132,7 +202,8 @@ int main() {
 ```
 
 ### 가중치 그래프의 경로 최댓값, 최솟값 구하기
->  st - > en가는 경로의 최솟값 최댓값
+
+> st - > en가는 경로의 최솟값 최댓값
 
 ```c++
 #define _CRT_SECURE_NO_WARNINGS
@@ -150,7 +221,7 @@ int maxCnt;
 
 int visited[100];
 void func(int now, int sum) {
-	
+
 	if (now == en) {
 		minCnt = min(minCnt, sum);
 		maxCnt = max(maxCnt, sum);
@@ -161,7 +232,7 @@ void func(int now, int sum) {
 	{
 		if (visited[i] == 1)continue;
 		if (arr[now][i] == 0)continue;
-		
+
 
 		visited[i] = 1;
 		func(i, sum + arr[now][i]);
@@ -194,11 +265,13 @@ int main() {
 }
 
 ```
+
 ### 벡터 사용하기
 
 > 행렬으로 하는 방법은 메모리 낭비가 있다
 
 > push_back, pop_back
+
 ```bash
 v[0] : 1,2,3
 v[1] : 0,3
@@ -207,12 +280,14 @@ v[2] : 1,3
 
 입력이 행렬로 들어오면 그냥 행렬쓰자
 
-하지만 
+하지만
+
 ```bash
 0, 1
 0, 2
 0, 3
 ```
+
 이런식으로 입력이 들어오면 벡터사용이 유리하다.
 
 입력형식에 따라 맞는 것 사용하자.
@@ -259,7 +334,7 @@ void func(int now, int cnt) {
 
 int main() {
 	freopen("input.txt", "r", stdin);
-	
+
 	cin >> nodeCnt>>edgeCnt;
 	for (int i = 0; i < edgeCnt; i++)
 	{
@@ -277,9 +352,11 @@ int main() {
 	return 0;
 }
 ```
+
 ### 가중치 있는 그래프의 벡터 사용하기
 
 구조체를 사용해서 벡터에 푸쉬한다.
+
 ```c++
 struct edge {
 	int to;
@@ -295,19 +372,20 @@ for (int i = 0; i < edgeCnt; i++)
 	v[from].push_back({to, cost});
 }
 ```
+
 ### 그래프 순회(전위/중위/후위)
+
 전위는 그냥 재귀에 앞쪽/ 후위는 뒷쪽에 프린트 now찍으면된다.
 중위가 문제.
 중위는 플래그를 써야한다
+
 ### 중위
+
 ```c++
 
 
 
 ```
-
-
-
 
 ## 2024.07-30 (화) 백트래킹2 🤔🤔
 
@@ -315,9 +393,10 @@ for (int i = 0; i < edgeCnt; i++)
 
 ### 복습1: 주사위를 N번 던져서 M에 따른결과 출력
 
-> 주사위, 카드문제는 기본 중에 기본이다. 
- 
+> 주사위, 카드문제는 기본 중에 기본이다.
+
 > 잊지 않도록 반복학습하자.
+
 ```c++
 #define _CRT_SECURE_NO_WARINGS
 #include <iostream>
@@ -392,10 +471,11 @@ int main() {
 	return 0;
 }
 ```
+
 ### N-Queen 매우 중요하다. 기본중의 기본
 
 - N을 입력받는다
-- N*N 체스판에 퀸을 N개 두는 경우의 수는 몇개인가?
+- N\*N 체스판에 퀸을 N개 두는 경우의 수는 몇개인가?
 - 퀸은 상하좌우,대각선 모두 이동가능하다.| \ / -
 
 > 컨셉을 잘잡아야한다. N-castle의 확장판
@@ -438,6 +518,7 @@ int main() {
 }
 
 ```
+
 너무어렵다. 이해하도록 노력해보자
 
 - 다빈치타워 문제.
@@ -448,6 +529,7 @@ int main() {
 > recursion의 연장선
 
 ### **Path**
+
 - 경로기억하기 -> 왔던 길을 기억해야한다.
 
 ```c++
@@ -473,18 +555,18 @@ void func(int level) {
 		path[level] = -1;
 
 	}
-	
+
 }
 int main() {
 	//freopen("input.txt", "r", stdin);
-	
+
 	cin >> N;
 	func(0);
 
 }
 ```
-> path에 내 위치 넣고 반환하고...
 
+> path에 내 위치 넣고 반환하고...
 
 ### path를 매개변수로 넣으면 되지않냐?
 
@@ -502,11 +584,12 @@ int main() {
 ### 가지치기의 두가지 방법.
 
 ### 1. for loop 안에서 조건이 맞으면 continue처리
+
 ```c++
     for (int i = 0; i < 6; i++)
     {
         if(i==3){ //3이면 넘긴다.
-            continue; 
+            continue;
         }
         path[level] = i;
         func(level + 1, M);
@@ -515,13 +598,14 @@ int main() {
 ```
 
 ### 2. 들어가고 즉시 나간다. 재귀함수 최 상단에 if로 처리 return
+
 ```c++
     if(level==3){ //3이면 넘긴다.
         return;
     }
     for (int i = 0; i < 6; i++)
     {
-        
+
         path[level] = i;
         func(level + 1, M);
         path[level] = -1;
@@ -530,7 +614,7 @@ int main() {
 
 ### visited 매우 중요
 
-> 왔던 곳이면 가지마라. 
+> 왔던 곳이면 가지마라.
 
 ```c++
     for (int i = 0; i < 6; i++)
@@ -547,6 +631,7 @@ int main() {
 ```
 
 ### 2차원 visited - 지나온 길(맵)
-visited[3][4] ==1; 
+
+visited[3][4] ==1;
 
 ### 주사위 N번 던지는 경우의 수 문제!!기초
