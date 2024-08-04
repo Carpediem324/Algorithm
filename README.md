@@ -283,4 +283,47 @@ int main() {
 ```
 # DFS
 
+무한재귀가 핵심이다.
+
 # BFS
+
+## 기본포맷
+```c++
+#include <iostream>
+#include <queue>
+using namespace std;
+
+int visited[7];
+int arr[7][7] = {
+ 0, 1, 1, 0, 0, 0, 0,
+ 1, 0, 0, 1, 1, 0, 0,
+ 1, 0, 0, 0, 0, 1, 1,
+ 0, 1, 0, 0, 0, 0, 0,
+ 0, 1, 0, 0, 0, 0, 0,
+ 0, 0, 1, 0, 0, 0, 0,
+ 0, 0, 1, 0, 0, 0, 0,
+};
+
+void bfs(int st) {
+	queue<int> q;
+	visited[st] = 1;
+	q.push(st);
+	while (!q.empty()) {
+		int now = q.front();
+		q.pop();
+		for (int i = 0; i < 7; i++)
+		{
+			if (visited[i] == 1) continue;
+			if (arr[now][i] == 0)continue;
+			visited[i] = 1;
+			q.push(i);
+		}
+		cout << now << " ";
+	}
+
+}
+
+int main() {
+	bfs(0);
+}
+```
