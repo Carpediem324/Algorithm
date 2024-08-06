@@ -396,3 +396,7 @@ void bfs(int st) {
 
 }
 ```
+
+## 백준 2178번 BFS문제를 반복 학습하자.
+
+- 2차원 bfs는 flood fill
