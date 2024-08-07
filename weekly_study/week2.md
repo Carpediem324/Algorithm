@@ -71,7 +71,7 @@ void bfs(int st) {
 			q.push(i);
 		}
 		cout << now << " ";
-	}
+	}g
 
 }
 
