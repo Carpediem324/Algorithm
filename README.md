@@ -150,6 +150,54 @@ int main()
 - v.clear() : 벡터를 비운다
 - 사용자가 정의한 구조체도 벡터의 템플릿으로 이용할 수 있다.
 
+## 백터 라이브러리 함수들.
+
+```c++
+#include <string>
+#include <vector>
+#include <iostream>
+using namespace std;
+
+int main() {
+	vector<int> v(3, 1);
+	vector<int>::iterator it = v.begin();
+
+	cout << "1. 초기화 : ";
+	for (int n : v) cout << n << " ";
+	cout << "\n";
+
+	it = v.insert(it, 2);
+	cout << "2. 맨앞에 삽입 : ";
+	for (int n : v) cout << n << " ";
+	cout << "\n";
+
+	it = v.insert(it, 2, 3);
+	cout << "3. 맨앞에 여러개 삽입 : ";
+	for (int n : v) cout << n << " ";
+	cout << "\n";
+
+	it = v.insert(it+3, 2, 4);
+	cout << "4. 3번째부터 여러개 삽입 : ";
+	for (int n : v) cout << n << " ";
+	cout << "\n";
+
+
+	int arr[] = { 5, 50, 500, 5000};
+
+	it = v.insert(v.begin(), arr, arr+4);
+	cout << "5. 맨앞의 배열 삽입 : ";
+	for (int n : v) cout << n << " ";
+	cout << "\n";
+
+	// 1<= 삭제 < 4 인걸 주의해야 한다.
+	v.erase(v.begin() + 1, v.begin() + 4);
+	cout << "6. 1~3까지 삭제 : ";
+	for (int n : v) cout << n << " ";
+	cout << "\n";
+
+	return 0;
+}
+```
 # Sort
 > 정렬은 기본. 하지만 개발 시에는 라이브러리 사용
 ## 버블, 삽입, 선택정렬
@@ -407,3 +455,12 @@ void bfs(int st) {
 
 # 다익스트라 Dijkstra
 
+# DP
+
+## Top-Down
+
+- 큰 문제부터 점점 쪼개나간다.
+
+## Bottom-Up
+
+- 작은 문제부터 차례대로 풀어간다.
