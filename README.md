@@ -281,6 +281,10 @@ bool cp(string a, string b) {
 sort(arr, arr+T, cp);
 ```
 
+조금 헷갈리는데 a<b 를 리턴했다면 a < b이다. 오름차순 정렬되는거
+
+반대로 a > b면 앞에 것이 더 크도록 sorting 내림차순
+
 # Greedy
 
 > 당장의 눈앞의 이익만 잘 쫓는다.
