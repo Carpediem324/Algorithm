@@ -459,6 +459,67 @@ void bfs(int st) {
 
 # 다익스트라 Dijkstra
 
+최단경로 알고리즘 매우중요하다.
+
+```c++
+#include <iostream>
+#define INF 1000000000
+#define N 5
+using namespace std;
+
+int weight[N][N] = { { 0,7,4,6,1},
+                     { INF,0,INF,INF,INF},
+                     { INF,2,0,5,INF},
+                     { INF,3,INF,0,INF},
+                     { INF,INF,INF,1,0} };
+
+bool visit[N];
+int dist[N];
+int min_node;
+
+int get_small_node() {
+    // 최소비용노드 탐색 함수
+    int min = INF;
+    int minpos = 0;
+    for (int i = 0; i < N; i++) {
+        if (dist[i] < min && !visit[i]) {
+            min = dist[i];
+            minpos = i;
+        }
+    }
+    return minpos;
+}
+
+void dijkstra(int start) {
+    for (int i = 0; i < N; i++) {
+        dist[i] = weight[start][i];
+    }
+
+    visit[start] = true;
+    for (int repeat = 0; repeat < N - 1; repeat++) {
+        min_node = get_small_node(); // 최소비용노드 탐색
+        visit[min_node] = true; // 최소비용노드 방문처리
+        for (int i = 0; i < N; i++) {
+            // 방문하지 않은 노드 중에, 시작점이 최소비용노드를 경유하는게
+            // 더 가까우면 값 갱신
+            if (!visit[i])
+                if (dist[min_node] + weight[min_node][i] < dist[i])
+                    dist[i] = dist[min_node] + weight[min_node][i];
+        }
+    }
+}
+
+int main() {
+    
+    dijkstra(0);
+
+    for (int i = 0; i < N; i++)
+        cout << dist[i] << "  ";
+
+    return 0;
+}
+```
+
 # DP
 
 ## Top-Down
