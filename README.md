@@ -522,6 +522,21 @@ int main() {
 
 # DP
 
+DP, Dynamic Programming(동적 계획법)은 무엇일까?
+DP란, 하나의 큰 문제를 작은 문제로 나누어 해결하는 기법을 의미한다. 
+
+```
+int f(int n){
+	if(n == 0 || n == 1) return 1;
+    return f(n-1) + f(n-2);
+}
+```
+DP의 사용 조건
+DP가 적용되기 위해서, 또는 문제풀이 기법이 DP라 부르기 위해서는 2가지 조건이 필요하다. 
+
+겹치는 소문제 ( Overlapping Subproblems )
+최적 부분 구조 ( Optimal Substructure )
+
 ## Top-Down
 
 - 큰 문제부터 점점 쪼개나간다.
@@ -529,6 +544,7 @@ int main() {
 ## Bottom-Up
 
 - 작은 문제부터 차례대로 풀어간다.
+
 
 ## Flood Fill
 
