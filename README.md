@@ -537,6 +537,10 @@ DP가 적용되기 위해서, 또는 문제풀이 기법이 DP라 부르기 위�
 겹치는 소문제 ( Overlapping Subproblems )
 최적 부분 구조 ( Optimal Substructure )
 
+값을 저장해서 나중에 cost가 높은 계산은 하지않고 불러오는 형식으로 하는 방법이다.
+
+간단한듯 어려움
+
 ## Top-Down
 
 - 큰 문제부터 점점 쪼개나간다.
