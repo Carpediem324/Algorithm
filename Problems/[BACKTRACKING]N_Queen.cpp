@@ -3,8 +3,8 @@
 using namespace std;
 
 int visited[15]; // 열 방문 확인
-int slash[30]; // '/' 대각선 방문 확인
-int backslash[30]; // '\' 대각선 방문 확인
+int slash[30]; // '/' 대각선 방문 확인 level + i
+int backslash[30]; // '\' 대각선 방문 확인 level - i + (N-1)
 int N;
 int resultcount = 0;
 
