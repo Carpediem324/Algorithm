@@ -80,3 +80,58 @@ int main() {
 ```
 
 struct안에 operator()함수로 정의한다.
+
+아래 외워라
+
+```c++
+struct compare {
+	bool operator()(int a, int b) {
+		return a < b;
+	}
+};
+
+priority_queue<int, vector<int>, compare> pq;
+```
+
+부등호는 sort의 compare함수와 반대이다.
+
+퀵소트, 힙소트 
+
+```c++
+#include <iostream>
+#include <queue>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+struct Member
+{
+	int id;
+	string name;
+};
+
+struct compare {
+	bool operator()(Member m1, Member m2)
+	{
+		if (m1.id == m2.id) return m1.name > m2.name;
+		return m1.id > m2.id;
+	}
+};
+
+priority_queue<Member, vector<Member>, compare> pq;
+
+int main()
+{
+	pq.push({ 1,"라" });
+	pq.push({ 5,"나" });
+	pq.push({ 1,"가" });
+	pq.push({ 3,"다" });
+
+	while (pq.size())
+	{
+		cout << pq.top().id << ' ' << pq.top().name << ' ';
+		pq.pop();
+	}
+}
+```
