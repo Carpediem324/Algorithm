@@ -122,10 +122,6 @@ void func() {
 	result = charging(man1, man2);
 	for (int i = 0; i < M; i++)
 	{
-		if (day == 39) {
-			int tc = 1;
-		}
-		day = i + 1;
 		man1.y += direct[amove[i]][0];
 		man1.x += direct[amove[i]][1];
 
