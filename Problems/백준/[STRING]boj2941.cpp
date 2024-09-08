@@ -28,7 +28,7 @@ int main() {
 	for (int i = 0; i < 8; i++) {
 		size_t pos = arr.find(croatia[i]);
 		while (pos != string::npos) {
-			arr.replace(pos, croatia[i].length(), "@");
+			arr.replace(pos, croatia[i].length(), "@");//replace활용하기
 			pos = arr.find(croatia[i]);  
 		}
 	}
