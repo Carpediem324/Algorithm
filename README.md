@@ -822,6 +822,54 @@ find함수 수정
 맵에서 5칸을 차지할때 + 각 귀퉁이를 채운 4가지의 경우 DFS로 가질못한다.
 
 
+# 투포인터
+
+### 개념은 간단하다. 첫번째 인덱스를 시작과 끝으로두고
+### 합계를 구해서 타겟보다 작으면 end를 올리고
+### 타겟보다 크면 start를 올린다
+
+### 그중에 길이가 가장짧은것을 구하는 것이다.
+```c++
+#include <iostream>
+#include <algorithm>
+#include <climits>
+using namespace std;
+
+int arr[100001];
+
+int main(void) {
+
+
+    int N, S;
+    cin >> N >> S;
+    for (int i = 0; i < N; i++) {//N개입력받고
+        cin >> arr[i];
+    }
+    
+    int start = 0, end = 0;//시작 끝
+    int sum = arr[0];//합
+    int ans = INT_MAX;
+    while (start <= end && end <= N) {
+        if (sum < S) {
+            end++;
+            sum += arr[end];
+        }
+        else {
+			ans = min(ans, end - start + 1);
+            sum -= arr[start];
+            start++;
+        }
+    }
+    if (ans == INT_MAX) {
+        cout << 0 << '\n';
+    }
+    else {
+        cout << ans << '\n';
+    }
+    return 0;
+}
+```
+
 이진탐색 알고리즘
 할게많다..
 ---
