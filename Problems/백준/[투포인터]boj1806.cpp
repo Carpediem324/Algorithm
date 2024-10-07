@@ -18,14 +18,12 @@ int main(void) {
     int sum = arr[0];//합
     int ans = INT_MAX;
     while (start <= end && end <= N) {
-        if (sum >= S) {//합계가작으면
-            ans = min(ans, end - start + 1);
-        }
         if (sum < S) {
             end++;
             sum += arr[end];
         }
         else {
+			ans = min(ans, end - start + 1);
             sum -= arr[start];
             start++;
         }
