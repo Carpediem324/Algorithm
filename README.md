@@ -873,9 +873,9 @@ int main(void) {
 # c++에서 소수점 차리수를 표현하기
 
 ```c++
-	#include <iostream>
-	cout << fixed;
-	cout.precision(2);
+#include <iostream>
+cout << fixed;
+cout.precision(2);
 ```
 
 # map을 메모이제이션하기
