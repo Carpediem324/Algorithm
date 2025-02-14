@@ -26,6 +26,16 @@ long long minfind(int start, int end, int node, int left, int right) {
 	int mid = (start + end) / 2;
 	return min(minfind(start, mid, node * 2, left, right), minfind(mid + 1, end, node * 2 + 1, left, right));
 }
+
+void update_seg(int start, int end, int node, int index, long long dif) {
+	if (index < start || end < index)return;
+	tree[node] += dif;
+	if (start == end)return;
+	int mid = (start + end) / 2;
+	update_seg(start, mid, node * 2,index, dif);
+	update_seg(mid + 1, end, node * 2 + 1,index, dif);
+}
+
 int N, M;
 
 int main() {
