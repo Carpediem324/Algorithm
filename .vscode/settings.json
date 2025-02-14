@@ -3,6 +3,7 @@
         "*.embeddedhtml": "html",
         "xstring": "cpp",
         "iostream": "cpp",
-        "xiosbase": "cpp"
+        "xiosbase": "cpp",
+        "utility": "cpp"
     }
 }
