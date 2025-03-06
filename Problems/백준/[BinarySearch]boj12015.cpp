@@ -27,7 +27,7 @@ int main() {
 	while (current<N) {
 		int target = res[res.size() - 1];
 		if (target < v[current]) {
-			res.push_back(v[current]);
+				res.push_back(v[current]);
 
 		}
 		else {
