@@ -1,3 +1,7 @@
+//단순하다.
+// 두개씩 짝지어서 묶어버리고
+// 한쌍은 그대로 타겟으로두고 (이 쌍은 목표치 찾는데 사용)
+// 나머지 쌍은 정렬 후 목표치를 이분탐색으로 찾는다.
 #include <iostream>
 #include <algorithm>
 #include <vector>
