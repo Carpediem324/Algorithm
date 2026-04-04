@@ -1,56 +1,8 @@
 # 알고리즘 총정리 - 매주 일요일 업데이트
 
-> 코딩테스트 준비용 핵심 개념/패턴 정리 노트입니다.
-> 마지막 업데이트: 2025-02-24
-
-## 빠른 목차
-- [DAT](#dat)
-- [Direct](#direct)
-  - [방향배열](#방향배열)
-- [cstring](#cstring)
-- [string](#string)
-- [string parsing](#string-parsing)
-  - [이건 3번씩봐서 이해해야한다.](#이건-3번씩봐서-이해해야한다)
-- [vector](#vector)
-  - [벡터 라이브러리 함수들.](#벡터-라이브러리-함수들)
-- [Sort](#sort)
-  - [버블, 삽입, 선택정렬](#버블-삽입-선택정렬)
-  - [병합, 퀵, 힙정렬](#병합-퀵-힙정렬)
-  - [sort 라이브러리 사용하기](#sort-라이브러리-사용하기)
-  - [Custom 정렬.](#custom-정렬)
-- [Greedy](#greedy)
-- [Recursion](#recursion)
-- [백트래킹](#백트래킹)
-  - [N-Queen](#n-queen)
-  - [**Path**](#path)
-  - [주사위 N번던져서 나오는 경우의 수 출력하기](#주사위-n번던져서-나오는-경우의-수-출력하기)
-- [DFS](#dfs)
-  - [기본적으로 이 포맷을 벗어나질 않는다.](#기본적으로-이-포맷을-벗어나질-않는다)
-  - [중요) 맵크기가 20이 넘어간다면? DFS를 쓰면 시간초과가 난다.](#중요-맵크기가-20이-넘어간다면-dfs를-쓰면-시간초과가-난다)
-  - [방향배열 실수했는지 항상 확인해라](#방향배열-실수했는지-항상-확인해라)
-- [BFS](#bfs)
-  - [큐를 사용한다. 기본적으로 아래 포맷을 사용하면 대부분 풀린다.](#큐를-사용한다-기본적으로-아래-포맷을-사용하면-대부분-풀린다)
-  - [백준 2178번 BFS문제를 반복 학습하자.](#백준-2178번-bfs문제를-반복-학습하자)
-- [다익스트라 Dijkstra](#다익스트라-dijkstra)
-- [DP](#dp)
-  - [Top-Down](#top-down)
-  - [Bottom-Up](#bottom-up)
-  - [Flood Fill](#flood-fill)
-- [배열돌리기4 백준 17406](#배열돌리기4-백준-17406)
-- [unordered_set](#unordered_set)
-- [Union Find](#union-find)
-- [MST](#mst)
-- [투포인터](#투포인터)
-- [c++에서 소수점 차리수를 표현하기](#c++에서-소수점-차리수를-표현하기)
-- [map을 메모이제이션하기](#map을-메모이제이션하기)
-- [세그먼트트리](#세그먼트트리)
-
----
-
-
 > 250224 update
 
-## DAT
+# DAT
 
 > Direct Access Table : 즉각 접근 자료구조
 
@@ -78,11 +30,11 @@ for(int i=0; i<5;i++){
 
 - 공간차지를 많이한다. 하지만 이는 생각할 이유가 없다. 코딩테스트를 준비한다면 Time Limit이 매우 중요하기 때문이다.
 
-## Direct
+# Direct
 
 > 방향배열을 이용하여 전체 탐색하는 것이다.
 
-### 방향배열
+## 방향배열
 
 > 동서남북, y와 x의 이동을 배열로 만들어 사용한다.
 
@@ -90,7 +42,7 @@ for(int i=0; i<5;i++){
 
 말보다는 문제로 보는게 더 이해하기 쉽다.
 
-#### 대각선값들의 합이 가장 큰 좌표 구하기
+### 대각선값들의 합이 가장 큰 좌표 구하기
 
 ```c++
 #define _CRT_SECURE_NO_WARNINGS
@@ -128,8 +80,8 @@ int sum(Point p) {
 	int total=0;
 	for (int i = 0; i < 4; i++)
 	{
-		int ny = p.y + direct[i][0];
-		int nx = p.x + direct[i][1];
+		int ny = p.y + direct[i][0]; 
+		int nx = p.x + direct[i][1]; 
 
 
 		if (ny >= 0 && ny < 5 && nx >= 0 && nx < 5) {
@@ -160,7 +112,7 @@ int main()
 }
 ```
 
-## cstring
+# cstring
 
 - strlen(문자열) : 길이반환
 - strstr(문자열, 찾는문자): 문자열에서 찾은문자의 주소 반환, 없다면 NULL반환
@@ -170,7 +122,7 @@ int main()
 - memset(arr, 0, sizeof(arr)) : cstring 안에있는 memset, 0이랑 -1 초기화만 된다.
 - memcpy(arr1,arr2,sizeof(arr1)) : arr1에 arr2의 내용을 size만큼 넣는다.
 
-## string
+# string
 
 - str.size(), str.length()   :  두개는 별 차이 없다. 벡터는 size함수임.
 - str.find("찾는거") : 찾는 문자의 첫번째 주소 반환
@@ -181,16 +133,16 @@ int main()
 - to_string(intNum) : intNum을 string으로 바꿔줌
 - str + str : 그냥 더하면 된다. strcat안해도된다.
 
-## string parsing
+# string parsing
 
 > 스트링을 분할하는 기법이다. 매우 중요하다.어렵다
 
-### 이건 3번씩봐서 이해해야한다.
+## 이건 3번씩봐서 이해해야한다.
 
 - str.find("찾는거") : 찾는 문자의 첫번째 주소 반환
 - str.substr(시작주소, 길이) : 시작주소부터 길이만큼 자름
 
-## vector
+# vector
 
 - 크기할당 X,동적할당, -> 정적배열이 빠르다.
 - `<type>` 탬플릿이라고한다.
@@ -199,7 +151,7 @@ int main()
 - v.clear() : 벡터를 비운다
 - 사용자가 정의한 구조체도 벡터의 템플릿으로 이용할 수 있다.
 
-### 벡터 라이브러리 함수들.
+## 백터 라이브러리 함수들.
 
 ```c++
 #include <string>
@@ -248,32 +200,32 @@ int main() {
 }
 ```
 
-## Sort
+# Sort
 
 > 정렬은 기본. 하지만 개발 시에는 라이브러리 사용
 
-### 버블, 삽입, 선택정렬
+## 버블, 삽입, 선택정렬
 
 $$
 n^2
 $$
 
-#### 버블정렬
+### 버블정렬
 
 - 바로 옆의 값을 계속비교한다.
 - 최댓값을 가장 오른쪽으로 미는형태
 
-#### 선택정렬
+### 선택정렬
 
 - 최솟값을 찾아서 가장 앞으로 넣는다.
 
-#### 삽입정렬
+### 삽입정렬
 
 - 키값을 정해서 뒤에서부터 비교한다.
 - 인덱스 1번(두번째값)부터 key로 정해서 그앞의 값들과 비교한다.
 - 한개씩 넣으면서 뒤에서부터 비교하는 기법
 
-### 병합, 퀵, 힙정렬
+## 병합, 퀵, 힙정렬
 
 $$
 n \log_2n
@@ -295,7 +247,7 @@ $$
 > 젤앞은 pivot, 피봇기준 좌우
 > 나눈 두부분 계속 반복.
 
-### sort 라이브러리 사용하기
+## sort 라이브러리 사용하기
 
 배열과 벡터의 정렬
 
@@ -332,7 +284,7 @@ String 정렬
     sort(str, str + 5, greater<string>());
 ```
 
-### Custom 정렬.
+## Custom 정렬.
 
 > 개발자가 비교함수를 만들어 sort함수의 3번째 인자로 넣으면 된다.
 
@@ -356,18 +308,18 @@ sort(arr, arr+T, cp);
 
 반대로 a > b면 앞에 것이 더 크도록 sorting 내림차순
 
-## Greedy
+# Greedy
 
 > 당장의 눈앞의 이익만 잘 쫓는다.
 > 각각의 시행이 독립적일 때 효과적
 
-## Recursion
+# Recursion
 
 > 자기자신을 호출하는 함수를 재귀함수라고 한다.
 
-## 백트래킹
+# 백트래킹
 
-### N-Queen
+## N-Queen
 
 ```c++
 #include <iostream>
@@ -408,7 +360,7 @@ int main() {
 
 ```
 
-### **Path**
+## **Path**
 
 - 경로기억하기 -> 왔던 길을 기억해야한다.
 
@@ -446,11 +398,11 @@ int main() {
 }
 ```
 
-### 주사위 N번던져서 나오는 경우의 수 출력하기
+## 주사위 N번던져서 나오는 경우의 수 출력하기
 
 백트래킹이나 DFS나 거기서 거기다. 가지치기가 매우중요. 백트래킹은 level==N일때 정지.
 
-## DFS
+# DFS
 
 입력에 따라 다르게 맵을 사용해야한다.
 
@@ -458,7 +410,7 @@ int main() {
 
 양방향인지, 가지치기 조건이 더 없는지 항상 확인해야한다.
 
-### 기본적으로 이 포맷을 벗어나질 않는다.
+## 기본적으로 이 포맷을 벗어나질 않는다.
 
 ```c++
 void func(int now, int sum) {
@@ -486,7 +438,7 @@ void func(int now, int sum) {
 }
 ```
 
-#### 2105. [모의 SW 역량테스트] 디저트 카페
+### 2105. [모의 SW 역량테스트] 디저트 카페
 
 - 시작점은 제시 X 모든점에서 시작한다.
 - 시작점, 현재점, 방향
@@ -496,13 +448,13 @@ void func(int now, int sum) {
 - 회전할 수 있으면 돌려서 DFS
 - 직진 DFS
 
-### 중요) 맵크기가 20이 넘어간다면? DFS를 쓰면 시간초과가 난다.
+## 중요) 맵크기가 20이 넘어간다면? DFS를 쓰면 시간초과가 난다.
 
-### 방향배열 실수했는지 항상 확인해라
+## 방향배열 실수했는지 항상 확인해라
 
-## BFS
+# BFS
 
-### 큐를 사용한다. 기본적으로 아래 포맷을 사용하면 대부분 풀린다.
+## 큐를 사용한다. 기본적으로 아래 포맷을 사용하면 대부분 풀린다.
 
 ```c++
 void bfs(int st) {
@@ -525,11 +477,11 @@ void bfs(int st) {
 }
 ```
 
-### 백준 2178번 BFS문제를 반복 학습하자.
+## 백준 2178번 BFS문제를 반복 학습하자.
 
 - 2차원 bfs는 flood fill
 
-## 다익스트라 Dijkstra
+# 다익스트라 Dijkstra
 
 최단경로 알고리즘 매우중요하다.
 
@@ -582,7 +534,7 @@ void dijkstra(int start) {
 }
 
 int main() {
-
+  
     dijkstra(0);
 
     for (int i = 0; i < N; i++)
@@ -592,7 +544,7 @@ int main() {
 }
 ```
 
-## DP
+# DP
 
 DP, Dynamic Programming(동적 계획법)은 무엇일까?
 DP란, 하나의 큰 문제를 작은 문제로 나누어 해결하는 기법을 의미한다.
@@ -614,17 +566,17 @@ DP가 적용되기 위해서, 또는 문제풀이 기법이 DP라 부르기 위�
 
 간단한듯 어려움
 
-### Top-Down
+## Top-Down
 
 - 큰 문제부터 점점 쪼개나간다.
 
-### Bottom-Up
+## Bottom-Up
 
 - 작은 문제부터 차례대로 풀어간다.
 
-### Flood Fill
+## Flood Fill
 
-#### SWEA 1953. 탈주범 검거
+### SWEA 1953. 탈주범 검거
 
 문제
 
@@ -650,7 +602,7 @@ DP가 적용되기 위해서, 또는 문제풀이 기법이 DP라 부르기 위�
 
 ---
 
-#### 지문 속 중요한 구문
+### 지문 속 중요한 구문
 
 > 한 시간 뒤, 맨홀 뚜껑을 통해 지하터널의 어느 한 지점으로 들어갔다
 
@@ -666,7 +618,7 @@ DP가 적용되기 위해서, 또는 문제풀이 기법이 DP라 부르기 위�
 
 ---
 
-#### 아이디어
+### 아이디어
 
 - 파이프는 현재 뿐만 다음 좌표의 파이프도 고려해야한다.
 - BFS - Flood fill문제
@@ -675,14 +627,14 @@ DP가 적용되기 위해서, 또는 문제풀이 기법이 DP라 부르기 위�
 
 ---
 
-## 배열돌리기4 백준 17406
+# 배열돌리기4 백준 17406
 
 - 위 문제에서 생각 해 볼만한 문제는 2가지이다
 
 1. 한칸씩 돌리는게 아니라 면단위로 90도 회전시키는거라면 어떻게 할건가?
 2. 1번 회전 -> 2번회전과 2번회전-> 1번회전은 전혀 다른 결과를 가져온다
 
-#### 그렇다면 어떻게 해결해야 할까?
+### 그렇다면 어떻게 해결해야 할까?
 
 아래 방법은 gpt를 돌려서나온 Permutation 사용법이다.
 
@@ -712,7 +664,7 @@ DP가 적용되기 위해서, 또는 문제풀이 기법이 DP라 부르기 위�
 	} while (next_permutation(perm.begin(), perm.end()));
 ```
 
-#### N과 M 1번
+### N과 M 1번
 
 - 기억이 잘 안나지만 재귀함수의 visited처리와 원상복구를 이용해
 - 숫자의 조합을 만들어낼 수 있다. 이를 사용해야한다.
@@ -759,7 +711,7 @@ int main() {
 }
 ```
 
-## unordered_set
+# unodered_set
 
 - 왜 사용할까? 정렬되지 않은 딕셔너리라고 보면되는데...
 
@@ -767,7 +719,7 @@ int main() {
 
 unordered_set은 insert, erase, find 모두가 O(1). 으로 수행된다!
 
-## Union Find
+# Union Find
 
 1. 어떤 사람이, 어떤 그룹에 속해 있는지?
 
@@ -846,7 +798,7 @@ int main()
 }
 ```
 
-#### 경로 압축 Path Compression
+### 경로 압축 Path Compression
 
 Root로 전부 묶어버린다
 find함수 수정
@@ -858,9 +810,9 @@ find함수 수정
 //  return paretn[tar];
 ```
 
-## MST
+# MST
 
-#### 최소신장트리 Minimum Spanning Tree
+### 최소신장트리 Minimum Spanning Tree
 
 - 다음과 같은 조건을 만족하는 그래프
 
@@ -876,25 +828,25 @@ find함수 수정
 - Cruscal - Union Find 활용 MST만들기
 - Prim
 
-#### Cruscal
+### Cruscal
 
 - edge의 cost를 오름차순 정렬 후 낮은 순으로 넣는다
 - union find의 find함수를 사용해 같은 그룹인지 아닌지 cycle을 체크한다.
 - edge의 개수가 N-1이면 끝낸다
 
-#### DFS로 못가는 경우가 있다.
+### DFS로 못가는 경우가 있다.
 
 맵에서 5칸을 차지할때 + 각 귀퉁이를 채운 4가지의 경우 DFS로 가질못한다.
 
-## 투포인터
+# 투포인터
 
-#### 개념은 간단하다. 첫번째 인덱스를 시작과 끝으로두고
+### 개념은 간단하다. 첫번째 인덱스를 시작과 끝으로두고
 
-#### 합계를 구해서 타겟보다 작으면 end를 올리고
+### 합계를 구해서 타겟보다 작으면 end를 올리고
 
-#### 타겟보다 크면 start를 올린다
+### 타겟보다 크면 start를 올린다
 
-#### 그중에 길이가 가장짧은것을 구하는 것이다.
+### 그중에 길이가 가장짧은것을 구하는 것이다.
 
 ```c++
 #include <iostream>
@@ -912,7 +864,7 @@ int main(void) {
     for (int i = 0; i < N; i++) {//N개입력받고
         cin >> arr[i];
     }
-
+  
     int start = 0, end = 0;//시작 끝
     int sum = arr[0];//합
     int ans = INT_MAX;
@@ -937,7 +889,7 @@ int main(void) {
 }
 ```
 
-## c++에서 소수점 차리수를 표현하기
+# c++에서 소수점 차리수를 표현하기
 
 ```c++
 #include <iostream>
@@ -945,9 +897,9 @@ cout << fixed;
 cout.precision(2);
 ```
 
-## map을 메모이제이션하기
+# map을 메모이제이션하기
 
-#### mymap.find(키값)없으면 끝주소반환.
+### mymap.find(키값)없으면 끝주소반환.
 
 if (mymap.find(mapkey) == mymap.end())
 	// 해당 키 값의 맵에 값이 없으면
@@ -995,7 +947,7 @@ int main(int argc, char** argv) {
 }
 ```
 
-## 세그먼트트리
+# 세그먼트트리
 
 부분합을 구하는 자료구조
 
@@ -1009,18 +961,18 @@ int main(int argc, char** argv) {
 using namespace std;
 
 int a[] = {1, 9, 3, 8, 4, 5, 5, 9, 10, 3, 4, 5};
-int tree[4 * NUMBER]; // 4를 곱하면 모든 범위를 커버할 수 있음. 갯수에 대해서 2의 제곱 형태의 길이를 가지기 때문임.
+int tree[4 * NUMBER]; // 4를 곱하면 모든 범위를 커버할 수 있음. 갯수에 대해서 2의 제곱 형태의 길이를 가지기 때문임. 
 
-// start: 시작 인덱스, end: 끝 인덱스
+// start: 시작 인덱스, end: 끝 인덱스 
 int init(int start, int end, int node) {
 	if(start == end) return tree[node] = a[start];
 	int mid = (start + end) / 2;
-	// 재귀적으로 두 부분으로 나눈 뒤에 그 **합**을 자기 자신으로 합니다.
+	// 재귀적으로 두 부분으로 나눈 뒤에 그 **합**을 자기 자신으로 합니다. 
 	return tree[node] = init(start, mid, node * 2) + init(mid + 1, end, node * 2 + 1);
 }
 
 // start: 시작 인덱스, end: 끝 인덱스
-// left, right: 구간 합을 구하고자 하는 범위
+// left, right: 구간 합을 구하고자 하는 범위 
 int sum(int start, int end, int node, int left, int right) {
 	// 범위 밖에 있는 경우
 	if(left > end || right < start) return 0;
@@ -1034,11 +986,11 @@ int sum(int start, int end, int node, int left, int right) {
 
 // start: 시작 인덱스, end: 끝 인덱스
 // index: 구간 합을 수정하고자 하는 노드
-// dif: 수정할 값
+// dif: 수정할 값 
 void update(int start, int end, int node, int index, int dif) {
-	// 범위 밖에 있는 경우
+	// 범위 밖에 있는 경우 
 	if(index < start || index > end) return;
-	// 범위 안에 있으면 내려가며 다른 원소도 갱신
+	// 범위 안에 있으면 내려가며 다른 원소도 갱신 
 	tree[node] += dif;
 	if (start == end) return;
 	int mid = (start + end) / 2;
@@ -1048,16 +1000,16 @@ void update(int start, int end, int node, int index, int dif) {
 
 int main(void) {
 	// 구간 합 트리의 인덱스를 제외하고는 모두 인덱스 0부터 시작합니다.
-	// 구간 합 트리 생성하기
+	// 구간 합 트리 생성하기 
 	init(0, NUMBER - 1, 1);
-	// 구간 합 구하기
+	// 구간 합 구하기 
 	cout << "0부터 12까지의 구간 합: " << sum(0, NUMBER - 1, 1, 0, 12) << '\n';
-	// 구간 합 구하기
+	// 구간 합 구하기 
 	cout << "3부터 8까지의 구간 합: " << sum(0, NUMBER - 1, 1, 0, 12) << '\n';
 	// 구간 합 갱신하기
 	cout << "인덱스 5의 원소를 -5만큼 수정" << '\n';
-	update(0, NUMBER - 1, 1, 5, -5);
-	// 구간 합 다시 구하기
+	update(0, NUMBER - 1, 1, 5, -5); 
+	// 구간 합 다시 구하기 
 	cout << "3부터 8까지의 구간 합: " << sum(0, NUMBER - 1, 1, 0, 12) << '\n';
 }
 ```
