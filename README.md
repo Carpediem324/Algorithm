@@ -73,6 +73,16 @@ int maxCount = 0;
 
 //이걸로하면 딸깍임.
 int maxCount = *max_element(dat, dat + 256);
+//배열일경우
+//int maxCount = *max_element(v.begin(), v.end());
+// set
+//int maxValue = *max_element(s.begin(), s.end());
+//셋은 이미 정렬되어있으니까
+//int maxValue = *s.rbegin();
+//혹은
+// int maxValue = *prev(s.end());
+// unordered_set
+//int maxValue = *max_element(us.begin(), us.end());
 
 for (int i = 0; i < 256; i++) {
     maxCount = max(maxCount, dat[i]);
