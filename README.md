@@ -61,11 +61,27 @@ key 값을 배열의 인덱스로 사용하는 기법이다. 매우 유용하고
 A,B,C,D,E를 E,D,C,B,A순으로 입력을 받았다 하자.
 
 ```c++
-int dat[200];
-char temp;
-for(int i=0; i<5;i++){
-    cin>>temp;
-    dat[temp]++;
+int dat[256] = {};
+
+// 1. 빈도 계산
+for (char c : str) {
+    dat[(unsigned char)c]++;
+}
+
+// 2. 최대 빈도 찾기
+int maxCount = 0;
+
+for (int i = 0; i < 256; i++) {
+    maxCount = max(maxCount, dat[i]);
+}
+
+// 3. 최빈 문자 찾기
+vector<char> modes;
+
+for (int i = 0; i < 256; i++) {
+    if (dat[i] == maxCount) {
+        modes.push_back((char)i);
+    }
 }
 ```
 
