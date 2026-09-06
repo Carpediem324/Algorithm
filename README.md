@@ -71,6 +71,9 @@ for (char c : str) {
 // 2. 최대 빈도 찾기
 int maxCount = 0;
 
+//이걸로하면 딸깍임.
+int maxCount = *max_element(dat, dat + 256);
+
 for (int i = 0; i < 256; i++) {
     maxCount = max(maxCount, dat[i]);
 }
